@@ -1,17 +1,13 @@
-Epsilon exercise
-Task 1: Maximum/minimum representable intergers
-my max int = 2147483647
-max int value = 2147483647
-my min int = -2147483648
-min int value = -2147483648
-Task 2: The machine epsilon
-The double machine epsilon was found to be 2.22044604925031E-16 and it should be around 2.22044604925031E-16
-The float machine epsilon was found to be 1.192093E-07 and it should be around 1.19209289550781E-07
-Task 3: tiny=epsilon/2
-a==b ? False
-a>1  ? False
-b>1  ? True
-1+tiny+tiny is therefore not larger than one and tiny+tiny+1 is. This is because two doubles in a finite digit representation can only be compared with the given absolute and/or relative precision
-Task 4: Comparing doubles
-Are 0.1+0.1...(8 times) the same as 8*0.1 according to ==? d1==d2 ? => False
-Are 0.1+0.1...(8 times) the same as 8*0.1 according to approx function? True
+vector v times 2 = 2 4 6
+
+vector u times 3 = 12 15 18
+
+vector v + u = 5 7 9
+
+vector v minus u = -3 -3 -3
+
+vector v negated = -1 -2 -3
+
+The vec other method of calculating the dot product gives: 32
+The dot vec1,vec2 method of calculating the dot product gies: 32
+The two approx methods are chronologically given as True and True
