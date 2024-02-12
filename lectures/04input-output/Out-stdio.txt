@@ -1,0 +1,4 @@
+this goes to stdout: x=7
+
+
+this goes to stdout: x=7
