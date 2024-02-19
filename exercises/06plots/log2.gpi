@@ -1,0 +1,13 @@
+\
+                set terminal svg background "white";\
+                set out "lnGamma.gnuplot.svg" ;\
+                set xlabel "x" ;\
+                set ylabel " " ;\
+                set title "Comparison of lnGammafunction and stirlings approximation with some factorials plotted." ;\
+                set key left ;\
+                set grid ;\
+                plot [0:3] \
+                "Out.txt" using 1:4 with lines title "lnGamma(x+1)"\
+                ,"Out.txt" using 1:5 with lines title "lnStirling(x)" \
+                ,"log.txt" using 1:3 with points pointtype 7 title "ln(x!)" ;\
+                
