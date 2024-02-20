@@ -11,4 +11,6 @@ main.exe : main.cs cmath.dll; $(MKEXE)
 
 cmath.dll : cmath.cs complex.cs ; $(MKLIB)
 
-
+.PHONEY : clean
+clean :
+	$(RM) Out.txt *.exe *.dll
