@@ -1,0 +1,26 @@
+Calculations done using complex numbers:
+
+sqrt of -1 = 6.12e-17+1i
+
+sqrt of i = 0.707+0.707i
+
+e to the i = 0.54+0.841i
+
+e to i*pi = -1+1.22e-16i
+
+i to the i = 0.208+0i
+
+Log of i = 0+1.57i
+
+sin(i*pi) = 0+11.5i
+
+Now we check if the calculated values are the same as the correct values: 
+
+is sqrt of -1 correct?: True
+
+is Log of i correct?: True
+
+is sqrt of i correct?: True
+
+is i to the i correct?: True 
+

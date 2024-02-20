@@ -9,5 +9,5 @@ genlist.dll : genlist.cs
 
 .PHONEY : clean
 clean:
-	$(RM) Out.txt main.exe
+	$(RM) [Oo]ut.txt *.exe *.dll
 
