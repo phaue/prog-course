@@ -1,0 +1,16 @@
+harm sum = 16.5934486664925
+real 4.97
+user 11.84
+sys 7.68
+harm sum = 16.7979824260802
+real 4.95
+user 12.48
+sys 6.93
+harm sum = 16.422296407743
+real 4.95
+user 11.90
+sys 7.56
+harm sum = 17.1696047203273
+real 4.95
+user 11.89
+sys 7.54
