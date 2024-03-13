@@ -4,11 +4,15 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 
 
-default : matrix.dll
 
+Out.txt : main.exe
+	mono $< > $@
 
+main.exe : main.cs matrix.dll
+	$(MKEXE)
+	
 
-matrix.dll : vectorclass.cs matrixclass.cs ; $(MKLIB)
+matrix.dll : vector.cs qrgs.cs matrix.cs ; $(MKLIB)
 
 
 
@@ -16,3 +20,4 @@ matrix.dll : vectorclass.cs matrixclass.cs ; $(MKLIB)
 .PHONEY : clean
 clean:
 	$(RM) [Oo]ut.txt *.exe *.dll [Ll]og.txt
+
