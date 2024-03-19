@@ -1,0 +1,24 @@
+Generated symmetric matrix :
+
+         1          0          3 
+         0          3          5 
+         3          5          6 
+Eigenvector matrix V: 
+
+     0.577     -0.775      0.256 
+     0.577       0.61      0.543 
+    -0.577     -0.166        0.8 
+Eigenvalue matrix D: 
+
+        -2          0          0 
+         0       1.64          0 
+         0          0       10.4 
+Numeric checks :
+Is V^TAV=D? True
+
+Is VDV^T==A? True
+
+Is V^TV=1? True
+
+Is V*V^T=1? True
+

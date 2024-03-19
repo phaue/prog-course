@@ -2,7 +2,7 @@ CODE = $(filter %.cs , $^)
 LIBS = $(addprefix -reference:, $(filter %.dll, $^))
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
-
+LIBPATH = ../Library/
 
 
 Out.txt : main.exe
@@ -12,7 +12,7 @@ main.exe : main.cs matrix.dll
 	$(MKEXE)
 	
 
-matrix.dll : vector.cs qrgs.cs matrix.cs ; $(MKLIB)
+matrix.dll : $(LIBPATH)vector.cs qrgs.cs $(LIBPATH)matrix.cs ; $(MKLIB)
 
 
 
