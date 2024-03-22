@@ -1,0 +1,9 @@
+c vector gives: 
+      4.96     -0.171 
+Error matrix gives: 
+
+   0.00125  -0.000197 
+ -0.000197   5.12e-05 
+The half-life can be found for the formula T½=ln(2)/lambda which in this case gives: 
+4.06242368851649 +- 0.170393518471826  days
+And the experimental halflife is 3.631 days, which means the found halflife is slightly wrong and not within the uncertainty

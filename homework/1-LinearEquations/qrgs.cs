@@ -42,9 +42,9 @@ public static partial class QRGS{
 
 
 	public static vector solve(matrix Q, matrix R, vector b){
-		if(Q.size1 != Q.size2){
-		       	throw new ArgumentException("Input must be a square matrix");
-		}
+		/*if(Q.size1 != Q.size2){
+	 		      throw new ArgumentException("Input must be a square matrix");
+		}*/
 		//this function should use Q and R from decomp and solvethe equation QRx=b for the given right hand side b
 		vector c = Q.transpose()*b;
 		vector x = new vector(c.size);
