@@ -18,7 +18,7 @@ class main{
 		vector y0 = new vector(10, 5);
 	double ti = 0;
 	double tf = 15;
-	var (tsol, Ysol) = runge.driver(f, (ti,tf), y0);
+	var (tsol, Ysol) = ODE.driver(f, (ti,tf), y0);
 	WriteLine("t value, x(t) value, y(t) value");
         for(int i=0;i<tsol.size;i++){
         WriteLine($"{tsol[i]}, {Ysol[i][0]} {Ysol[i][1]}");

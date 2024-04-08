@@ -90,7 +90,7 @@ public static double operator%(vector a,vector b){
 	return a.dot(b);
 	}
 
-public vector map(System.Func<double,double>f){
+public vector map(System.Func<double,double> f){
 	vector v=new vector(size);
 	for(int i=0;i<size;i++)v[i]=f(this[i]);
 	return v;

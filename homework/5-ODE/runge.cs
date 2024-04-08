@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 using static System.Math;
 
-public partial class runge{
+public class ODE{
 	public static (vector,vector) rkstep12(Func<double,vector,vector> f,double x,vector y,double h){
 	vector k0 = f(x,y);              /* embedded lower order formula (Euler) */
 	vector k1 = f(x+h/2,y+k0*(h/2)); /* higher order formula (midpoint) */
@@ -18,7 +18,7 @@ public static (genlist<double>,genlist<vector>) driver(
 		double h=0.125,              /* initial step-size */
 		double acc=0.01,             /* absolute accuracy goal */
 		double eps=0.01,              /* relative accuracy goal */
-		int totaliterations = 10000
+		int maxit = 1000
 		){
 	var (a,b)=interval; double x=a; vector y=ystart.copy();
 	var xlist=new genlist<double>(); xlist.add(x);
@@ -37,10 +37,29 @@ public static (genlist<double>,genlist<vector>) driver(
 			}
 		h *= Min( Pow(tol/err,0.25)*0.95 , 2); // readjust stepsize
 		iteration += 1;						       
-        }while(iteration<=totaliterations);
+        }while(iteration<=maxit);
 	return (xlist,ylist);
 	}//driver
 
+/*  KAN FØRST LAVES NÅR JEG HAR LAVET SPLINES OPGAVEN AHHHHH
+public static Func<double,vector> make_linear_interpolant(genlist<double> x,genlist<vector> y)
+{
+	Func<double,vector> interpolant = delegate(double z){
+		int i=BinarySearch(x,z);
+		double Δx=x[i+1]-x[i];
+		vector Δy=y[i+1]-y[i];
+		return y[i]+Δy/Δx*(z-x[i]);
+	};
+	return interpolant;
+}
+*/
+
+public static Func<double,vector> make_ode_ivp_interpolant
+(Func<double,vector,vector> f,(double,double)interval,vector y,double acc=0.01,double eps=0.01,double hstart=0.01 )
+{
+	(var xlist,var ylist) = driver(f,interval,y,acc,eps,hstart);
+	return make_linear_interpolant(xlist,ylist);
+}
 
 
 }

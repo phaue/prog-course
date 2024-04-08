@@ -1,0 +1,10 @@
+Solution of general relativity problem
+t value, theta(t) value, omega(x) value
+0, 1 0
+0.125, 1 0
+0.375, 1 0
+0.875, 1 0
+1.875, 1 0
+3.875, 1 0
+7.875, 1 0
+10, 1 0

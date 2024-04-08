@@ -4,7 +4,8 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 LIBPATH = ../Library/
 
-default : odeint.gnuplot.svg  lotka_volterra.gnuplot.svg
+default : Out_genrel.txt
+#default : odeint.gnuplot.svg  lotka_volterra.gnuplot.svg
 
 
 lotka_volterra.gnuplot.svg : Out_lotka_volterra.txt
@@ -36,6 +37,11 @@ Out_lotka_volterra.txt : lotka_volterra.exe
 	mono $< > $@
 Out_odeint.txt : odeint.exe
 	mono $< > $@
+Out_genrel.txt : genrel.exe
+	mono $< > $@
+
+genrel.exe : Genrel.cs lib.dll
+	$(MKEXE)
 
 lotka_volterra.exe : lotka_volterra.cs lib.dll
 	$(MKEXE)

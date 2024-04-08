@@ -41,7 +41,7 @@ public class main{
 	vector y0 = new vector(PI-0.1, 0);
 	double ti = 0;
 	double tf = 10;
-	var (tsol, Ysol) = runge.driver(f, (ti,tf), y0);
+	var (tsol, Ysol) = ODE.driver(f, (ti,tf), y0);
 	WriteLine("t value, theta(t) value, omega(x) value");
         for(int i=0;i<tsol.size;i++){
         WriteLine($"{tsol[i]}, {Ysol[i][0]} {Ysol[i][1]}");
