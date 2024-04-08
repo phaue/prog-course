@@ -41,19 +41,59 @@ public static (genlist<double>,genlist<vector>) driver(
 	return (xlist,ylist);
 	}//driver
 
-/*  KAN FØRST LAVES NÅR JEG HAR LAVET SPLINES OPGAVEN AHHHHH
+public static int binsearch(genlist<double> x, double z)
+	{/* locates the interval for z by bisection */ 
+	if( z<x[0] || z>x[x.size-1] ) throw new Exception("binsearch: bad z");
+	int i=0, j=x.size-1;
+	while(j-i>1){
+		int mid=(i+j)/2;
+		if(z>x[mid]) i=mid; else j=mid;
+		}
+	return i;
+	}
+
+
 public static Func<double,vector> make_linear_interpolant(genlist<double> x,genlist<vector> y)
 {
 	Func<double,vector> interpolant = delegate(double z){
-		int i=BinarySearch(x,z);
+		int i=binsearch(x,z);
 		double Δx=x[i+1]-x[i];
 		vector Δy=y[i+1]-y[i];
 		return y[i]+Δy/Δx*(z-x[i]);
 	};
 	return interpolant;
 }
-*/
+/*
+public static Func<double,vector> make_quadratic_interpolant(genlist<double> x,genlist<vector> y)
+{
+	Func<double,vector> s = delegate(double z){
+		int n = x.size;
+		vector b = new vector(n-1);
+        vector c = new vector(n-1);
+        vector p=new vector(n-1);
+	    vector h=new vector(n-1);
 
+        for(int i=0;i<n-1;i++){
+		h[i]=x[i+1]-x[i];
+		p[i]=(y[i+1]-y[i])/h[i];
+		}
+		c[0] = 0;
+            for(int j=0;j<n-2;j++){ /*upwards recursion
+                c[j+1]=(p[j+1]-p[j]-c[j]-h[j])/h[j+1];}
+            c[n-2] /=2.0;
+            for(int j=n-3;j>=0;j--){ /*downwards recursion
+                c[j] =(p[j+1]-p[j]-c[j+1]*h[j+1])/h[j];}
+            for(int j=0;j<n-1;j++){ /*filling in b
+                b[j] = p[j]-c[j]*h[j];
+            }
+		//interpolation
+		int k=binsearch(x,z);
+		double dx = z-x[k];
+        return y[k]+dx*(b[k]+dx*c[k]);
+};
+	return s;
+}
+*/
 public static Func<double,vector> make_ode_ivp_interpolant
 (Func<double,vector,vector> f,(double,double)interval,vector y,double acc=0.01,double eps=0.01,double hstart=0.01 )
 {
@@ -61,5 +101,4 @@ public static Func<double,vector> make_ode_ivp_interpolant
 	return make_linear_interpolant(xlist,ylist);
 }
 
-
-}
+}//ODE class

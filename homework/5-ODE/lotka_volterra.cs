@@ -14,14 +14,14 @@ class main{
 
 	static int Main(){
 		
-		WriteLine("Solution of odeint manual problem");	
+		WriteLine("Solution of Lotka Volterra problem");	
 		vector y0 = new vector(10, 5);
 	double ti = 0;
 	double tf = 15;
-	var (tsol, Ysol) = ODE.driver(f, (ti,tf), y0);
+	var (tsol, xysol) = ODE.driver(f, (ti,tf), y0);
 	WriteLine("t value, x(t) value, y(t) value");
         for(int i=0;i<tsol.size;i++){
-        WriteLine($"{tsol[i]}, {Ysol[i][0]} {Ysol[i][1]}");
+        WriteLine($"{tsol[i]}, {xysol[i][0]} {xysol[i][1]}");
         }	
 		return 0;
 	}

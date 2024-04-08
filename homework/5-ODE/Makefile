@@ -4,9 +4,25 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 LIBPATH = ../Library/
 
-default : Out_genrel.txt
-#default : odeint.gnuplot.svg  lotka_volterra.gnuplot.svg
+default : genrel.gnuplot.svg odeint.gnuplot.svg  lotka_volterra.gnuplot.svg
 
+
+genrel.gnuplot.svg : Out_genrel.txt
+	echo '\
+		set terminal svg background "white";\
+		set out "$@" ;\
+		set xlabel "x";\
+		set xlabel "y";\
+		set title "Different solutions to the general relativity problem";\
+		set grid;\
+		set key right bottom;\
+		set xrange[-2.7:2.7];\
+		set yrange[-2:3.5];\
+		plot\
+		"genrel_i.txt"  using 4:5 with lines title "i) eps=0, u0=1, uprime0=0"\
+		,"genrel_ii.txt"  using 4:5 with lines title "ii) eps=0, u0=1, uprime0=-0.5"\
+		,"genrel_iii.txt"  using 4:5 with lines title "iii) eps=0.01, u0=1, uprime0=-0.7";\
+		' | gnuplot
 
 lotka_volterra.gnuplot.svg : Out_lotka_volterra.txt
 	echo '\
@@ -40,7 +56,7 @@ Out_odeint.txt : odeint.exe
 Out_genrel.txt : genrel.exe
 	mono $< > $@
 
-genrel.exe : Genrel.cs lib.dll
+genrel.exe : genrel.cs lib.dll
 	$(MKEXE)
 
 lotka_volterra.exe : lotka_volterra.cs lib.dll
@@ -56,7 +72,7 @@ lib.dll : $(LIBPATH)vector.cs runge.cs genlist.cs
 
 .PHONEY : clean
 clean : 
-	$(RM) [Oo]ut.txt *.exe *.dll *.svg *.txt
+	$(RM) *.exe *.dll *.svg *.txt
 
 
 
