@@ -1,0 +1,8 @@
+Normal integrator:
+ncalls=8572 int=1.99996150007805
+ncalls=8604 int=-3.99991705899915 
+
+Variable transformation integrator:
+ncalls=16 int=1.99999201046432
+ncalls=96 int=-3.99987385646141 
+

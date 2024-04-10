@@ -66,7 +66,7 @@ odeint.exe : odeint.cs lib.dll
 	$(MKEXE)
 
 
-lib.dll : $(LIBPATH)vector.cs runge.cs genlist.cs
+lib.dll : $(LIBPATH)vector.cs runge.cs $(LIBPATH)genlist.cs
 	$(MKLIB)
 
 
