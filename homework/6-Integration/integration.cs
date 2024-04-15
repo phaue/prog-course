@@ -18,17 +18,6 @@ public partial class integration{
         if(err<= δ+ε*Abs(Q)) return Q;
         else return integrate(f,a,(a+b)/2,δ/Sqrt(2),ε,f1,f2)+integrate(f,(a+b)/2,b,δ/Sqrt(2),ε,f3,f4);
 }
-public static double erf(double z, double ep=0.001, double delta=0.001){
-    if(z<0) return -erf(-z);
-    var f = new Func<double,double> (x=>Exp(-x*x));
-    if(z <= 1) {
-        return 2/Sqrt(PI)*integrate(f, 0, z, delta, ep);
-        }
-    else{
-        var g = new Func<double,double> (t=>f((z+(1-t)/t))/t/t);
-        return 1-2/Sqrt(PI)*integrate(g, 0, 1, delta, ep);
-    }
-}
 
 public static double openquad
 (Func<double,double> f,double a,double b,double acc=1e-3,double eps=1e-3)
