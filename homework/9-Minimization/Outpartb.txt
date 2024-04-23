@@ -1,0 +1,1 @@
+The found values from the minimization routine is: m=125.283798300214, gamma=-2.38713092947235, A=10.8753385903656

@@ -50,7 +50,7 @@ public static (vector,int) newton(
 		}while(true);
 		x+=λ*dx;
 		counter +=1;
-		if(counter > 1000) break;
+		if(counter > 500) break;
 	}while(true);
 	return (x, counter);
 }//newton
