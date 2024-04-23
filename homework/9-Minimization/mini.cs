@@ -29,12 +29,13 @@ public partial class minimization{
 	return (H+H.T)/2; // you think?
 }
 
-public static vector newton(
+public static (vector,int) newton(
 	Func<vector,double> φ, /* objective function */
 	vector x,              /* starting point */
 	double acc=1e-3,        /* accuracy goal, on exit |∇φ| should be < acc */
     double λmin = 1/1024
 ){
+	int counter = 0;
 	do{ /* Newton's iterations */
 		var dφ = gradient(φ,x);
 		if(dφ.norm() < acc) break; /* job done */
@@ -48,8 +49,10 @@ public static vector newton(
 			λ/=2;
 		}while(true);
 		x+=λ*dx;
+		counter +=1;
+		if(counter > 1000) break;
 	}while(true);
-	return x;
+	return (x, counter);
 }//newton
 
 }
