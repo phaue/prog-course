@@ -39,4 +39,4 @@ lib.dll : $(LIBPATH)vector.cs $(LIBPATH)matrix.cs $(QRPATH)qrgs.cs $(ODEPATH)run
 
 .PHONEY : clean
 clean : 
-	$(RM) *.exe *.dll *.svg *.txt *.log
+	$(RM) *.exe *.dll *.svg Out*.txt fitdata.txt
