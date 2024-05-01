@@ -4,6 +4,10 @@ using static System.Math;
 public class ann{
     public int n; /* number of hidden neurons */
     public Func<double,double> f = x => x*Exp(-x*x); /* activation function */
+    /* 1st deriv, 2nd deriv and anti-deriv functions */
+    public Func<double,double> df = x => Exp(-x*x)*(1-2*x*x);
+    public Func<double,double> ddf = x => Exp(-x*x)*x*(4*x*x-6);
+    public Func<double,double> intf = x => -Exp(-x*x)/2;
 
     /* network parameters */
     public vector p;
@@ -21,6 +25,23 @@ public class ann{
         for(int i =0; i<n;i++) sum+= f((x-a(i))/b(i))*w(i);
         return sum;
         }//response
+      
+    public double derivative(double x){
+        double sum= 0;
+        for(int i=0;i<n;i++) sum+=w(i)*df((x-a(i))/b(i))/b(i);
+        return sum;
+    }
+    public double derivative2(double x){
+        double sum= 0;
+        for(int i=0;i<n;i++) sum+=w(i)*ddf((x-a(i))/b(i))/b(i)/b(i);
+        return sum;
+    }
+    public double antiderivative(double x0, double x){ //x0 is the starting coordinate of the function
+      double sum=0;
+      for(int i =0; i<n;i++) sum+= w(i)*b(i)*(intf((x-a(i))/b(i))-intf((x0-a(i))/b(i)));
+      return sum;
+    }
+    
     public void train(vector x,vector y){
       /* train the network to interpolate the given table {x,y} */
       for(int i=0;i<n;i++){
