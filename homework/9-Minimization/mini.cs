@@ -32,10 +32,10 @@ public partial class minimization{
 public static (vector,int) newton(
 	Func<vector,double> phi, /* objective function */
 	vector x,              /* starting point */
-	double acc=1e-3,        /* accuracy goal, on exit |∇φ| should be < acc */
+	double acc=1e-3        /* accuracy goal, on exit |∇φ| should be < acc */
 ){
 	int counter = 0;
-
+	double epsi = 1e-6;
 /*i dont want to calculate the hessian and gradient each time
 B = inverse hessian H^-1
 secant eq (B+dB)*y=s or in short dB*y=u where y=gradiant(phi(x+s))-gradiant(phi(x)) and u =s-B*y
@@ -52,41 +52,27 @@ if lambda min in reached then reset hessian matrix and start again
 		double lambda = 1;
 		do{
 			if(phi(x+lambda*dx) < phi(x)){
-				x += lambda*dx
-				B += //broyden update of the inverse hessian is needed here
+				vector y = gradient(phi,x+lambda*dx) - grad;
+				x += lambda*dx;
+				vector u = lambda*dx- B*y ;
+				if(u.dot(y)>epsi){ //SR1 broyden update
+					matrix U = matrix.outer(u, u);
+					matrix dB = U/(u.dot(y));
+					B += dB;	//broyden update of the inverse hessian is needed here
+				}
 				break;
 			}
 			lambda /=2;
-			if(lambda< 1/1024){
-				x += lambda *dx;
-				set_identity(B);
+			if(lambda< 1.0/1024){
+				x += lambda*dx;
+				B.set_identity();
 				break;
 			}
-		}while(true);
-	}while(true);
+		}while(true);//second while loop
+		counter++;
+		if(counter>10000) break;
+	}while(true);//first while loop
 	
-
-/*
-	do{ 
-		var dφ = gradient(φ,x);
-		if(dφ.norm() < acc) break; 
-		var H = hessian(φ,x);
-		var QRH = QRGS.GivensQR(H);   
-		var dx = QRGS.givenssolve(-dφ, QRH); 
-		double λ=1,φx=φ(x);
-		
-		do{ 
-			if( φ(x+λ*dx) < φx ) break; 
-			if( λ < λmin ) break; 
-			λ/=2;
-		}while(true);
-
-		x+=λ*dx;
-		counter +=1;
-		if(counter > 100) break;
-	}while(true);
-*/
-
 	return (x, counter);
 
 

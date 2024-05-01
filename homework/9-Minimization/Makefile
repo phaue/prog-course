@@ -6,6 +6,7 @@ LIBPATH = ../Library/
 QRPATH = ../1-LinearEquations/
 ODEPATH = ../5-ODE/
 
+default : Outparta.txt fit.gnuplot.svg
 
 fit.gnuplot.svg: Outpartb.txt Makefile
 	echo '\

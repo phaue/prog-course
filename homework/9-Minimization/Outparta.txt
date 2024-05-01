@@ -1,0 +1,6 @@
+Root of the Rosenbrock function with starting conditions=(-3, 1)
+         1          1 
+Steps taken to reach the minimum: 6524
+Root of the Himmelblau function with starting conditions=(-27, 25)
+         3          2 
+Steps taken to reach the minimum: 18
