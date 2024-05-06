@@ -9,6 +9,7 @@ class main{
 	System.Threading.Tasks.Parallel.For( 1, nterms+1, (long i) => sum+=1.0/i );
 	System.Console.Write($"harm sum = {sum}\n");
 
+	System.Console.WriteLine("It is much slower than the first method. This is due to the function having to be processed each time unlike the other call that just processed the predefined function.");
 // It does not return the correct result, and it is ridicilously slower than the other call
 // something something - this being a function call that has to be processed each time unlike the other one that just loops without considering the content
 

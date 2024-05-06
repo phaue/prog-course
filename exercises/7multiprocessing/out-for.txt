@@ -1,16 +1,20 @@
-harm sum = 16.5934486664925
-real 4.97
-user 11.84
-sys 7.68
-harm sum = 16.7979824260802
-real 4.95
-user 12.48
-sys 6.93
-harm sum = 16.422296407743
-real 4.95
-user 11.90
-sys 7.56
-harm sum = 17.1696047203273
-real 4.95
-user 11.89
-sys 7.54
+harm sum = 18.6453081910587
+It is much slower than the first method. This is due to the function having to be processed each time unlike the other call that just processed the predefined function.
+real 2.79
+user 3.78
+sys 5.26
+harm sum = 18.7760669944076
+It is much slower than the first method. This is due to the function having to be processed each time unlike the other call that just processed the predefined function.
+real 2.96
+user 4.51
+sys 4.70
+harm sum = 18.6555794677707
+It is much slower than the first method. This is due to the function having to be processed each time unlike the other call that just processed the predefined function.
+real 2.87
+user 4.28
+sys 4.67
+harm sum = 18.5663437180575
+It is much slower than the first method. This is due to the function having to be processed each time unlike the other call that just processed the predefined function.
+real 2.51
+user 3.57
+sys 5.31

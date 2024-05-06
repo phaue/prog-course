@@ -1,16 +1,20 @@
-harm sum = 18.9978964138542
-real 5.59
-user 14.20
-sys 7.62
-harm sum = 18.9978964138545
-real 5.63
-user 14.42
-sys 7.48
-harm sum = 18.9978964138557
-real 5.65
-user 14.59
-sys 7.28
 harm sum = 18.9978964138543
-real 5.57
-user 14.68
-sys 7.18
+Again it is way slower, again we have to do a function call within the iteration which is a lot slower.
+real 2.91
+user 5.17
+sys 5.03
+harm sum = 18.9978964138529
+Again it is way slower, again we have to do a function call within the iteration which is a lot slower.
+real 2.81
+user 4.81
+sys 4.79
+harm sum = 18.9978964138534
+Again it is way slower, again we have to do a function call within the iteration which is a lot slower.
+real 2.58
+user 4.89
+sys 4.68
+harm sum = 18.9978964138553
+Again it is way slower, again we have to do a function call within the iteration which is a lot slower.
+real 2.61
+user 4.85
+sys 4.79

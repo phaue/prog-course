@@ -1,40 +1,50 @@
-using static System.Console;
 using static System.Math;
+using static System.Console;
 
+class main{
+	static int Main(){
+	//initializing of two vectors v and u using the defined class
+	vec v = new vec(1.0, 2.0, 3.0);
+	vec u = new vec(4.0, 5.0, 6.0);
+	vec w = new vec(0.5, 1, 1.5);
+	Write("Vectors v, u and w respectively: \n");
+	Write("v=");
+	v.print();
+	Write("u=");
+	u.print();
+	Write("w=");
+	w.print();
+	//using the defined operators for multiplikation addition and subtraction.
+	vec vscaled = v*2.0;
+	vec uscaled = u*3.0;
+	vec wscaled= w*2.0;
+	vec vaddu = v + u;
+	vec vminusu = v - u;
+	vec vneg = -v;
 
-public class vec{
-	public double x,y,z; /*the three components of the 3 dimensional vector*/
-	//constructors
-	public vec(){ x=y=z=0; }
-	public vec(double x, double y, double z){ this.x=x; this.y=y; this.z=z; }
-
-	//overload mathematical operators
-	public static vec operator*(vec v, double c){return new vec(c*v.x,c*v.y,c*v.z);}
-	public static vec operator*(double c, vec v){return v*c;}
-	public static vec operator+(vec u, vec v){return new vec(u.x+v.x, u.y+v.y, u.z+v.z);}
-	public static vec operator-(vec u){return new vec(-u.x, -u.y, -u.z);}
-	public static vec operator-(vec u, vec v){return new vec(u.x-v.x,u.y-v.y,u.z-v.z);}
-
-	//methods
-	public void print(string s){Write(s);WriteLine($"{x} {y} {z}\n");}
-	public void print(){this.print("");}
+	double dot1 = v.dot(u);
+	double dot2 = vec.dot(v,u);
 	
-	public double dot(vec other) => this.x*other.x+this.y*other.y+this.z*other.z;
-	public static double dot(vec v, vec w) =>v.x*w.x+v.y*w.y+v.z*w.z;
+	
+	bool aprox1 = vec.approx(v, wscaled);
+	bool aprox2 = v.approx(wscaled);
+			
 
-	static bool approx(double a, double b, double acc=1e-9, double eps=1e-9){
-			if(Abs(a-b)<acc) return true;
-			if(Abs(a-b)<(Abs(a)+Abs(b))*eps) return true;
-			else return false;
-			}
-	public bool approx(vec other){
-		if(!approx(this.x, other.x)) return false;
-		if(!approx(this.y,other.y)) return false;
-		if(!approx(this.z,other.z)) return false;
-		else return true;
-		}
-	public static bool approx(vec u,vec v) => u.approx(v);
+	vscaled.print("vector v times 2 = ");
+	uscaled.print("vector u times 3 = ");
+	vaddu.print("vector v + u = ");
+	vminusu.print("vector v minus u = ");
+	vneg.print("vector v negated = ");
+	Write($"The vec other method of calculating the dot product gives: {dot1}\n");
+	Write($"The dot vec1,vec2 method of calculating the dot product gies: {dot2}\n");
+	Write($"The two approx methods are chronologically given as {aprox1} and {aprox2}\n");
 
-	public override string ToString(){return $"{x} {y} {z}";}
 
+
+
+	return 0;	
+
+
+
+	}
 }

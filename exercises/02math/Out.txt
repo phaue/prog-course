@@ -5,16 +5,16 @@ e to the power of pi =23.1406926327793, and e^pi should equal 23.14
 pi to the power of e =22.459157718361, and pi^e should equal 22.46 
 
 Task 2:
-gamma(1)=0.999999989064903
-gamma(2)=0.999999989064903
-gamma(3)=1.99999997812981
-gamma(4)=5.99999993438942
-gamma(5)=23.9999997375577
-gamma(6)=119.999998687788
-gamma(7)=719.99999212673
-gamma(8)=5039.99994488711
-gamma(9)=40319.9995590969
-gamma(10)=362879.997652016
+gamma approx(1)=0.999999989064903, gamma(1)=1, correct within single precision? True 
+gamma approx(2)=0.999999989064903, gamma(2)=1, correct within single precision? True 
+gamma approx(3)=1.99999997812981, gamma(3)=2, correct within single precision? True 
+gamma approx(4)=5.99999993438942, gamma(4)=6, correct within single precision? True 
+gamma approx(5)=23.9999997375577, gamma(5)=24, correct within single precision? True 
+gamma approx(6)=119.999998687788, gamma(6)=120, correct within single precision? False 
+gamma approx(7)=719.99999212673, gamma(7)=720, correct within single precision? False 
+gamma approx(8)=5039.99994488711, gamma(8)=5040, correct within single precision? False 
+gamma approx(9)=40319.9995590969, gamma(9)=40320, correct within single precision? False 
+gamma approx(10)=362879.997652016, gamma(10)=362880, correct within single precision? False 
 
  Task 3:
 lngamma(1)=-1.09350976051914E-08

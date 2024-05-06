@@ -13,7 +13,7 @@ class main{
 			var numbers = line.Split(split_delimiters, split_options);
 			foreach(var number in numbers){
 				double x=double.Parse(number);
-				Error.WriteLine($"{x} {Sin(x)} {Cos(x)}");
+				Error.WriteLine($"x={x} sin(x)={Sin(x)} cos(x)={Cos(x)}");
 			}
 		}
 		return 0;

@@ -1,3 +1,10 @@
+Vectors v, u and w respectively: 
+v=1 2 3
+
+u=4 5 6
+
+w=0.5 1 1.5
+
 vector v times 2 = 2 4 6
 
 vector u times 3 = 12 15 18

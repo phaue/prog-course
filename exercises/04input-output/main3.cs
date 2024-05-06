@@ -21,7 +21,7 @@ class main{
 
 		for(string line=instream.ReadLine();line!=null;line=instream.ReadLine()){
 			double x=double.Parse(line);
-			outstream.WriteLine($"{x} {Sin(x)} {Cos(x)}");
+			outstream.WriteLine($"x={x} sin(x)={Sin(x)} cos(x)={Cos(x)}");
 			}
 		instream.Close();
 		outstream.Close();

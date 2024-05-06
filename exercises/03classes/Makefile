@@ -1,17 +1,21 @@
-Out.txt : main.exe vecmain.dll #epsimain.exe
-	mono main.exe > Out.txt
-	#mono $< 1> $@ 2> log.txt 1> sends standard output, 2> sends standard error
+default : Outeps.txt Outvec.txt
+
+Outeps.txt : epsimain.exe
+	mono $< > $@
+
+Outvec.txt : vecmain.exe vecmain.dll
+	mono $< > $@
 
 epsimain.exe : epsimain.cs
 	mcs -target:exe -out:$@  $<
 
-main.exe : main.cs vecmain.dll
-	mcs -target:exe -out:$@ -reference:vecmain.dll $<
+vecmain.exe : vecmain.cs vecclass.dll
+	mcs -target:exe -out:$@ -reference:vecclass.dll $<
 
-vecmain.dll : vecmain.cs
+vecclass.dll : vecclass.cs
 	mcs -target:library -out:$@ $<
 
 .PHONEY : clean
 clean: 
-	$(RM) epsimain.exe Out.txt main.exe
+	$(RM) Out*.txt *.exe
 

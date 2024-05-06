@@ -11,7 +11,7 @@ class main{
 	System.Threading.Tasks.Parallel.For( 1, nterms+1, (long i)=>sum.Value+=1.0/i );
 	double totalsum=sum.Values.Sum();
 	System.Console.Write($"harm sum = {totalsum}\n");
-
+	System.Console.WriteLine("Again it is way slower, again we have to do a function call within the iteration which is a lot slower.");
 //This however produces the right result but it is still slower than the original method.
 
 

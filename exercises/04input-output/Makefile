@@ -21,5 +21,5 @@ main3.exe : main3.cs
 
 .PHONEY : clean
 clean : 
-	$(RM) mai*.exe Out*.txt
+	$(RM) *.exe Out*.txt
 

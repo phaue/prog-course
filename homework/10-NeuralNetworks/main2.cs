@@ -17,7 +17,6 @@ class main{
             xs[i]=x0+(x1-x0)*i/(npoints-1);
             ys[i] = f(xs[i]);}
         neuralnet.train(xs,ys);
-        WriteLine($"{x0}");
         for(double k=x0;k<=x1;k+=1.0/64){
             WriteLine($"{k} {neuralnet.response(k)} {neuralnet.derivative(k)} {neuralnet.derivative2(k)} {neuralnet.antiderivative(x0, k)}");
         }

@@ -6,7 +6,7 @@ static class main{
 	static double pot2 = Pow(2.0, 0.2);
 	static double etopi = Pow(E, PI);
 	static double pitoe = Pow(PI, E);
-	
+	static double[] gammavals = new double[] {1,1,2,6,24, 120, 720, 5040, 40320, 362880};
 	
 
 	static int Main(){
@@ -19,7 +19,7 @@ static class main{
 		
 		Write("\n");
 		Write("Task 2:\n");
-		for(int i=1; i<=10; i++)Write($"gamma({i})={sfuns.fgamma(i)}\n");
+		for(int i=1; i<=10; i++)Write($"gamma approx({i})={sfuns.fgamma(i)}, gamma({i})={gammavals[i-1]}, correct within single precision? {sfuns.approx(sfuns.fgamma(i), gammavals[i-1])} \n");
 		
 		Write("\n Task 3:\n");
 		for(int i=1; i<=10; i++)Write($"lngamma({i})={sfuns.lngamma(i)}\n");

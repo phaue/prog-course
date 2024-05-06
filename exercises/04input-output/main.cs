@@ -11,7 +11,7 @@ public class main{
 				var numbers=words[1].Split(',');
 				foreach(var number in numbers){
 					double x=double.Parse(number);
-					WriteLine($"{x} {Sin(x)} {Cos(x)}");
+					WriteLine($"x={x} sin(x)={Sin(x)} cos(x)={Cos(x)}");
 				}
 			}
 		}

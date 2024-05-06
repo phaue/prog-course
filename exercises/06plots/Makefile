@@ -4,10 +4,25 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 
 
-default : Gamma.gnuplot.svg lnGamma.gnuplot.svg
+default : Gamma.gnuplot.svg lnGamma.gnuplot.svg Erf.gnuplot.svg
 
+Erf.gnuplot.svg : Outerr.txt Makefile
+	echo '\
+		set terminal svg background "white" ; \
+		set out "$@" ;\
+		set key left; \
+		set xlabel "x" ;\
+		set ylabel "erf(x)" ;\
+		set tics out ;\
+		set grid;\
+		set title "Error function" ;\
+		plot [-3:3] \
+       			"$<" with lines notitle \
+			,"erf.data.txt" using 1:2 with points pointtype 6 notitle \
+			,"erf.data.txt" using (-($$1)):(-($$2)) with points pointtype 6 notitle;\
+		' | tee log.gpi | gnuplot
 
-Gamma.gnuplot.svg : Out.txt Makefile
+Gamma.gnuplot.svg : Outgam.txt Makefile
 	echo '\
 		set terminal svg background "white";\
 		set out "$@" ;\
@@ -22,7 +37,7 @@ Gamma.gnuplot.svg : Out.txt Makefile
 		,"log.txt" using 1:2 with points pointtype 7 title "x!" ;\
 		' | tee log1.gpi | gnuplot
 
-lnGamma.gnuplot.svg : Out.txt Makefile
+lnGamma.gnuplot.svg : Outgam.txt Makefile
 	echo '\
                 set terminal svg background "white";\
                 set out "$@" ;\
@@ -36,13 +51,17 @@ lnGamma.gnuplot.svg : Out.txt Makefile
                 ,"$<" using 1:5 with lines title "lnStirling(x)" \
                 ,"log.txt" using 1:3 with points pointtype 7 title "ln(x!)" ;\
                 ' | tee log2.gpi | gnuplot
+Outerr.txt : main.exe
+	mono $< > $@
 
-Out.txt : main.exe
-	mono $< 1> $@ 2>log.txt
+Outgam.txt : main2.exe
+	mono $< 1> $@ 2>loggam.txt
 
+main.exe : main.cs sfuns.dll
+	$(MKEXE)
 sfuns.dll : sfuns.cs ; $(MKLIB)
-main.exe : main.cs sfuns.dll ; $(MKEXE)
+main2.exe : main2.cs sfuns.dll ; $(MKEXE)
 
 .PHONEY : clean
 clean : 
-	$(RM) log* [Oo]ut.txt *gnuplot.svg *.exe *.dll
+	$(RM) log* Out*.txt *gnuplot.svg *.exe *.dll
