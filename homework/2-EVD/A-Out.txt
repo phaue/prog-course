@@ -1,18 +1,18 @@
 Generated symmetric matrix :
 
-         1          0          3 
-         0          3          5 
-         3          5          6 
+         8          3          8 
+         3          7          7 
+         8          7          2 
 Eigenvector matrix V: 
 
-     0.577     -0.775      0.256 
-     0.577       0.61      0.543 
-    -0.577     -0.166        0.8 
+    -0.418      0.657      0.627 
+    -0.373     -0.754      0.541 
+     0.828   -0.00809       0.56 
 Eigenvalue matrix D: 
 
-        -2          0          0 
-         0       1.64          0 
-         0          0       10.4 
+     -5.19          0          0 
+         0       4.46          0 
+         0          0       17.7 
 Numeric checks :
 Is V^TAV=D? True
 

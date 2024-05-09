@@ -4,26 +4,29 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 LIBPATH = ../Library/
 
-default : A-Out.txt B-Out.txt lowfuncs.gnuplot.svg rmax.gnuplot.svg dr.gnuplot.svg
+default : A-Out.txt lowfuncs.gnuplot.svg rmax.gnuplot.svg dr.gnuplot.svg
 
-
-lowfuncs.gnuplot.svg : lowestinput.txt Makefile
+lowfuncs.gnuplot.svg : B-Out.txt Makefile
 	echo '\
-		set terminal svg background "white" ;\
-		set out "$@" ;\
-		set xlabel "r" ;\
-		set ylabel "E" ;\
+		set terminal svg background "white";\
+		set out "$@";\
+		set xlabel "r";\
+		set ylabel "E";\
+		set grid;\
+		set term svg size 500,800;\
+		set multiplot layout 2,1 columns;\
 		set title "Lowest numerical eigenfunctions";\
-	        set key right;\
-		set grid; \
 		plot\
-		"$<" using 5:1 with lines title "k=1"\
-		, "$<" using 5:2 with lines title "k=2"\
-		, "$<" using 5:3 with lines title "k=3"\
-		, "$<" using 5:4 with lines title "k=4";\
-		' | gnuplot	
+		"lowestinput.txt" using 5:1 with lines title "k=1"\
+		,"lowestinput.txt" using 5:2 with lines title "k=2";\
+		set title "Lowest analytical wavefunctions";\
+		plot\
+		"analytical.txt" using 1:2 with lines title "k=1"\
+		,"analytical.txt" using 1:3 with lines title "k=2";\
+		unset multiplot;\
+		' | gnuplot
 
-rmax.gnuplot.svg : convinput.txt Makefile
+rmax.gnuplot.svg : B-Out.txt Makefile
 	echo '\
 		set terminal svg background "white" ;\
 		set out "$@" ;\
@@ -33,10 +36,10 @@ rmax.gnuplot.svg : convinput.txt Makefile
 		set key right ;\
 		set grid ;\
 		plot \
-		"$<" using 2:1 with lines title "E0(rmax)";\
+		"convinput.txt" using 2:1 with lines title "E0(rmax)";\
 		' | tee log1.gpi | gnuplot
 
-dr.gnuplot.svg : convinput.txt Makefile
+dr.gnuplot.svg : B-Out.txt Makefile
 	echo '\
                 set terminal svg background "white" ;\
                 set out "$@" ;\
@@ -46,7 +49,7 @@ dr.gnuplot.svg : convinput.txt Makefile
                 set key right ;\
                 set grid ;\
                 plot \
-		"$<" using 4:3 with lines title "E0(dr)";\
+		"convinput.txt" using 4:3 with lines title "E0(dr)";\
                 ' | tee log2.gpi | gnuplot
 
 
@@ -54,7 +57,7 @@ A-Out.txt : A-main.exe
 	mono $< > $@
 
 B-Out.txt : B-main.exe
-	mono $< -rmax:10 -dr:0.3 >$@
+	mono $< -rmax:10 -dr:0.1 >$@
 
 B-main.exe : B-main.cs matrix.dll
 	$(MKEXE)
