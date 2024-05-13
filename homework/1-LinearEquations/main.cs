@@ -2,10 +2,16 @@ using System;
 using static System.Console;
 
 class main{
-	static int Main(){//skal lige lave n og m som input og ikke hardcoded
-		//generere en høj matrix, og printer den
-		int n =5;int m=2; // Default values
-
+		static int Main(string[] args){//generere en høj matrix, og printer den
+        int n =2;int m=2; // Default values
+        foreach(var arg in args){
+            var words = arg.Split(':');
+			if(words[0]=="-size"){
+				var numbers=words[1].Split(',');
+				n = (int)double.Parse(numbers[0]);
+				m = (int)double.Parse(numbers[1]);
+        }
+		}
 
 		WriteLine("Part A.1) \n");
 		matrix M = QRGS.generatematrix(n, m); // n is number of rows i want, m is the number of columns i want
