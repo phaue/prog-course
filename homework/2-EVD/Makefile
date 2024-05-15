@@ -4,7 +4,23 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 LIBPATH = ../Library/
 
-default : A-Out.txt lowfuncs.gnuplot.svg rmax.gnuplot.svg dr.gnuplot.svg
+default : A-Out.txt lowfuncs.gnuplot.svg rmax.gnuplot.svg dr.gnuplot.svg time.gnuplot.svg
+
+time.gnuplot.svg: out.times.txt Makefile
+	echo '\
+		set terminal svg background "white";\
+		set out "$@" ;\
+		set xlabel "Size, N, of matrix(NxN)";\
+		set ylabel "Time";\
+		set title "Time to diagonalize an NxN matrix using jacobi routine";\
+		set grid;\
+		set key right top;\
+		a=1; f(n) = a*n*n*n;\
+		fit f(x) "out.times.txt" using 1:2 via a;\
+		plot\
+		"$<"  using 1:2 with lp lc rgb "blue" title "data"\
+		,f(x) with lines lc rgb "red" title "N^3 fit to data";\
+		' | gnuplot
 
 lowfuncs.gnuplot.svg : B-Out.txt Makefile
 	echo '\
@@ -53,6 +69,20 @@ dr.gnuplot.svg : B-Out.txt Makefile
                 ' | tee log2.gpi | gnuplot
 
 
+Ns := $(shell seq 100 20 500)
+
+out.times.txt: C-main.exe Makefile
+	for N in $(Ns); do \
+		time -ao log.$$N -f "$$N %e" mono C-main.exe $$N & \
+		done; wait
+	>out.times.txt
+	for N in $(Ns); do cat log.$$N >> out.times.txt; done
+	$(RM) log*
+	
+
+C-main.exe : C-main.cs matrix.dll
+	$(MKEXE)
+
 A-Out.txt : A-main.exe
 	mono $< > $@
 
@@ -73,5 +103,5 @@ matrix.dll : jacobi.cs $(LIBPATH)vector.cs $(LIBPATH)matrix.cs ; $(MKLIB)
 
 .PHONEY : clean
 clean:
-	$(RM) [Oo]ut.txt *.exe *.dll [Ll]og.txt *.svg *.txt *.gpi
+	$(RM) [Oo]ut.txt *.exe *.dll [Ll]og* *.svg *.txt *.gpi
 
