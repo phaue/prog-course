@@ -1,0 +1,31 @@
+The first {xi,yi} table gives the following:
+Manually calculated b values:
+         0          0          0          0 
+Program calculated b values:
+         0          0          0          0 
+Manually calculated c values:
+         0          0          0          0 
+Program calculated c values:
+         0          0          0          0 
+
+
+The second {xi,yi} table gives the following:
+Manually calculated b values:
+         1          1          1          1 
+Program calculated b values:
+         1          1          1          1 
+Manually calculated c values:
+         0          0          0          0 
+Program calculated c values:
+         0          0          0          0 
+
+
+The third {xi,yi} table gives the following:
+Manually calculated b values:
+         2          4          6          8 
+Program calculated b values:
+         2          4          6          8 
+Manually calculated c values:
+         1          1          1          1 
+Program calculated c values:
+         1          1          1          1 
