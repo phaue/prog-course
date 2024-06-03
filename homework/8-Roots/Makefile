@@ -6,7 +6,7 @@ LIBPATH = ../Library/
 QRPATH = ../1-LinearEquations/
 ODEPATH = ../5-ODE/
 
-default : epsconv.gnuplot.svg accconv.gnuplot.svg rminconv.gnuplot.svg rmaxconv.gnuplot.svg wf.gnuplot.svg
+default : epsconv.gnuplot.svg accconv.gnuplot.svg rminconv.gnuplot.svg rmaxconv.gnuplot.svg wf.gnuplot.svg Out_partc.txt
 
 epsconv.gnuplot.svg: Outhyd.txt Makefile
 	echo '\
@@ -83,12 +83,15 @@ Outhyd.txt : hydro.exe
 
 Out.txt : main.exe
 	mono $< > $@
+Out_partc.txt : mainc.exe
+	mono $< > $@
 
 hydro.exe : hydro.cs lib.dll
 	$(MKEXE)
 main.exe : main.cs lib.dll
 	$(MKEXE)
-
+mainc.exe : mainc.cs lib.dll
+	$(MKEXE)
 
 lib.dll : $(LIBPATH)vector.cs $(LIBPATH)matrix.cs $(QRPATH)qrgs.cs $(ODEPATH)runge.cs $(LIBPATH)genlist.cs roots.cs
 	$(MKLIB)

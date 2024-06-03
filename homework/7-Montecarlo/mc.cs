@@ -3,27 +3,35 @@ using static System.Math;
 
 public partial class mc{
 public static (double,double) plainmc(
-Func<vector,double> f,vector a,vector b,int N, Random RND = null
-	){
-        int dim=a.size; double V=1; for(int i=0;i<dim;i++)V*=b[i]-a[i];
-        double sum=0,sum2=0;
+Func<vector,double> f,
+vector a,
+vector b,
+int N,
+Random RND = null){
+
+        int dim=a.size;
+        double V=1;
+        for(int i=0;i<dim;i++){
+                V*=b[i]-a[i];
+        }
+        double sum=0;
+        double sum2=0;
 	var x=new vector(dim);
 	if(RND == null) RND = new Random();
         for(int i=0;i<N;i++){ // sample 200 points and generate x each time with a new double
-                for(int k=0;k<dim;k++)x[k]=a[k]+RND.NextDouble()*(b[k]-a[k]); //makes sure x is within the interval!
-                double fx=f(x); sum+=fx; sum2+=fx*fx; //calculate the sum of all these N points
+                for(int k=0;k<dim;k++){
+                        x[k]=a[k]+RND.NextDouble()*(b[k]-a[k]); //makes sure x is within the interval!
                 }
-        double mean=sum/N, sigma=Sqrt(sum2/N-mean*mean); //define mean as the mean value gained from the sample points
+                double fx=f(x);
+                double sum+=fx;
+                double sum2+=fx*fx; //calculate the sum of all these N points
+                }
+        double mean=sum/N
+        double sigma=Sqrt(sum2/N-mean*mean); //define mean as the mean value gained from the sample points
         var result=(mean*V,sigma*V/Sqrt(N)); //returnere V ved at gange med mean sampling og så brug starting conditions
         return result;
 }
-/* for at lave den pseudo random skal jeg implementere genereringen af x ved brug af halton metoden
-så initialiser x som værende af en bestemt dimension ligesom før
-så generer halton, med dimension d og x som har dimension d
-for i,i<N;i++ halton(i, dim, vector x(dim))
-f(x) udregn summer
-hvad med error?????
-*/
+
 
 
 public static double corput(int n, int b){
@@ -98,4 +106,28 @@ Func<vector,double> f,vector a,vector b,int N){
         return (result,err);
 }
 
+/*
+If N<nmin return N-point plain Monte Carlo estimate of integral and variance;
+Sample nmin points and estimate the integral and the variance;
+Find the dimension with largest sub-variance;
+Subdivide the volume along this dimension;
+Divide the remaning points between the two sub-volumes proportional to sub-variances;
+Dispatch two recursive calls on the sub-volumes;
+Estimate the grand integral and grand error;
+Return the grand integral and the grand error;
+
+*/
+public static (double,double) stratified(Func<vector,double> f,
+vector a,
+vector b,
+int N,
+int nmin=100){
+        if(N<nmin){
+        (res, var) = plainmc(f,a,b,N);
+        }
+        if(var<0.001){
+                return (res,var);
+        }
+
+}
 } 

@@ -17,7 +17,7 @@ public class main{
         double rmax = 8;    
         double Estart = -0.7;
         Func<double, double> m = delegate(double E) {return M(E, rmin, rmax);};
-        double Efound = roots.newton(m, Estart);
+        double Efound = roots.quadraticnewton(m, Estart);
         WriteLine($"The estimated ground state energy from the auxilary function is{Efound}");
         
         double Eactual = -0.5;
@@ -36,7 +36,7 @@ public class main{
         var outrmax = new System.IO.StreamWriter("conv_rmax.txt", append:false);
         for(double rm = 2;rm<=10;rm+=0.5){
             Func<double, double> ms = delegate(double E) {return M(E, rmin, rm);};
-            double Ef = roots.newton(ms, Estart);
+            double Ef = roots.quadraticnewton(ms, Estart);
             outrmax.WriteLine($"{rm:f5} {Ef} {Eactual}");
         }
         outrmax.Close();
@@ -45,7 +45,7 @@ public class main{
         var outrmin = new System.IO.StreamWriter("conv_rmin.txt", append:false);
         for(double rm = 0.05;rm<=1;rm+=0.05){
             Func<double, double> ms = delegate(double E) {return M(E, rm, rmax);};
-            double Ef = roots.newton(ms, Estart);
+            double Ef = roots.quadraticnewton(ms, Estart);
             outrmin.WriteLine($"{rm:f5} {Ef} {Eactual}");
         }
         outrmin.Close();
@@ -56,7 +56,7 @@ public class main{
         for(double i=1;i>0.000000000000001;i/=2){
 
             Func<double, double> ms = delegate(double E) {return M(E,rmin,rmax, i);};
-            double Ef = roots.newton(ms, Estart);
+            double Ef = roots.quadraticnewton(ms, Estart);
             outacc.WriteLine($"{i} {Ef} {Eactual}");
         }
         outacc.Close();
@@ -64,7 +64,7 @@ public class main{
         var outeps = new System.IO.StreamWriter("conv_eps.txt", append:false);
         for(double i=1;i>0.000000000000001;i/=2){
             Func<double, double> ms = delegate(double E) {return M(E,rmin,rmax, 0.01, i);};
-            double Ef = roots.newton(ms, Estart);
+            double Ef = roots.quadraticnewton(ms, Estart);
             outeps.WriteLine($"{i} {Ef} {Eactual}");
         }
         outeps.Close();

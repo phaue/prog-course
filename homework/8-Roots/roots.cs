@@ -35,11 +35,11 @@ do{ /* Newton's iterations */
 	double λ=1;
     double λmin=1/1024;
 	do{ /* linesearch */
-		z=x+λ*Dx;
-		fz=f(z);
-		if( fz.norm() < (1-λ/2)*fx.norm() ) break;
-		if( λ < λmin ) break;
-		λ/=2;
+		z=x+λ*Dx; //x
+		fz=f(z); //eval of x
+		if( fz.norm() < (1-λ/2)*fx.norm() ) break; //check condition for tolerance
+		if( λ < λmin ) break; //check stepsize
+		λ/=2; //reduce stepsize
 		}while(true);
 	x=z; fx=fz;
 	}while(true);
@@ -55,5 +55,43 @@ public static double newton(Func<double,double>f, double x, double acc=1e-2){
     return resx[0];
 }   
 
+
+public static vector quadraticnewton(
+	Func<vector,vector>f /* the function to find the root of */
+	,vector x            /* the start point */
+	,double acc=1e-2     /* accuracy goal: on exit ‖f(x)‖ should be <acc */
+	,vector δx=null      /* optional δx-vector for calculation of jacobian */
+	){
+vector fx=f(x),z,fz;
+do{ /* Newton's iterations */
+	if(fx.norm() < acc) break; /* job done */
+	matrix J=jacobian(f,x,fx,δx);
+	(matrix Q, matrix R) = QRGS.decomp(J);
+	vector Dx = QRGS.solve(Q,R,-fx); /* Newton's step */
+	double λ=1;
+    double λmin=1/1024;
+	double phi0 = 0.5*fx.norm();
+	double phiprime0 = -fx.norm();
+	do{ /* linesearch */
+		z=x+λ*Dx; //x
+		fz=f(z); //eval of x
+		if( fz.norm() < (1-λ/2)*fx.norm() ) break; //check condition for tolerance
+		if( λ < λmin ) break; //check stepsize
+		double c = (0.5*fz.norm()-phi0-phiprime0*λ)/(λ*λ);
+		λ = -phiprime0/(2*c); //reduce stepsize
+		}while(true);
+	x=z; fx=fz;
+	}while(true);
+return x;
+}
+public static double quadraticnewton(Func<double,double>f, double x, double acc=1e-2){
+    //rewrite input to multidimensional
+    Func<vector,vector> newf = delegate(vector a) {return new vector(f(a[0]));};
+    vector newx = new vector(x);
+
+    vector resx = quadraticnewton(newf, newx);
+
+    return resx[0];
+}   
 
 }//roots
