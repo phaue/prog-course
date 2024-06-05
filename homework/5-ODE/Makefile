@@ -4,15 +4,31 @@ MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 LIBPATH = ../Library/
 
-default : genrel.gnuplot.svg odeint.gnuplot.svg  lotka_volterra.gnuplot.svg
 
+default : genrel.gnuplot.svg odeint.gnuplot.svg  lotka_volterra.gnuplot.svg threebody.gnuplot.svg
+
+
+threebody.gnuplot.svg : Out_threebody.txt Makefile
+	echo '\
+		set terminal svg background "white";\
+		set out "$@" ;\
+		set xlabel "x";\
+		set ylabel "y";\
+		set title "Stable gravitational three body orbit";\
+		set grid;\
+		set key right bottom;\
+		plot\
+		"$<"  using 8:9 with lines title "planet 1"\
+		,"$<"  using 10:11 with lines title "planet 2"\
+		,"$<"  using 12:13 with lines title "planet 3";\
+		' | gnuplot
 
 genrel.gnuplot.svg : Out_genrel.txt
 	echo '\
 		set terminal svg background "white";\
 		set out "$@" ;\
 		set xlabel "x";\
-		set xlabel "y";\
+		set ylabel "y";\
 		set title "Different solutions to the general relativity problem";\
 		set grid;\
 		set key right bottom;\
@@ -49,6 +65,8 @@ odeint.gnuplot.svg : Out_odeint.txt
 		,"Out_odeint.txt"  using ($$1):($$3) with lines title "omega(t)";\
 		' | gnuplot
 
+Out_threebody.txt : threebody.exe
+	mono $< > $@
 Out_lotka_volterra.txt : lotka_volterra.exe
 	mono $< > $@
 Out_odeint.txt : odeint.exe
@@ -65,6 +83,8 @@ lotka_volterra.exe : lotka_volterra.cs lib.dll
 odeint.exe : odeint.cs lib.dll
 	$(MKEXE)
 
+threebody.exe : threebody.cs lib.dll
+	$(MKEXE)
 
 lib.dll : $(LIBPATH)vector.cs runge.cs $(LIBPATH)genlist.cs
 	$(MKLIB)

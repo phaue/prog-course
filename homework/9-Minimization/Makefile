@@ -6,7 +6,9 @@ LIBPATH = ../Library/
 QRPATH = ../1-LinearEquations/
 ODEPATH = ../5-ODE/
 
-default : Outparta.txt fit.gnuplot.svg
+default : Outpartc.txt Outparta.txt
+
+#default : Outparta.txt fit.gnuplot.svg
 
 fit.gnuplot.svg: Outpartb.txt Makefile
 	echo '\
@@ -22,6 +24,9 @@ fit.gnuplot.svg: Outpartb.txt Makefile
 		,"fitdata.txt"  using 1:2 with lines title "Breit Wigner fit";\
 		' | gnuplot
 
+Outpartc.txt : partc.exe
+	mono $< > $@
+
 Outpartb.txt : partb.exe
 	mono $< < higgsdata.txt >$@
 
@@ -32,6 +37,9 @@ parta.exe : parta.cs lib.dll
 	$(MKEXE)
 
 partb.exe : partb.cs lib.dll
+	$(MKEXE)
+
+partc.exe : partc.cs lib.dll
 	$(MKEXE)
 
 lib.dll : $(LIBPATH)vector.cs $(LIBPATH)matrix.cs $(QRPATH)qrgs.cs $(ODEPATH)runge.cs $(LIBPATH)genlist.cs mini.cs

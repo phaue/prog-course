@@ -47,15 +47,15 @@ public class ann{
       for(int i=0;i<n;i++){
         setb(i, 1);
         setw(i,1);
-        seta(i, x[0]+(x[x.size-1]-x[0])*i/(n-1)); // why do i need different a's?
+        seta(i, x[0]+(x[x.size-1]-x[0])*i/(n-1)); 
       }
       Func<vector,double> cost = delegate(vector u) {
         ann newann = new ann(u);
         double sum=0;
-        for(int j=0;j<x.size;j++) sum+= Pow(newann.response(x[j])-y[j],2);
+        for(int j=0;j<x.size;j++) sum+= Pow(newann.response(x[j])-y[j],2); //calculation of cost function
         return sum/x.size;
         };
-      (vector resp, int count) = minimization.newton(cost, p, 1e-3);
-      p = resp;
+      (vector resp, int count) = minimization.newton(cost, p, 1e-3); // minimize cost using the previously defined vector p and the minimization routine from HW 9
+      p = resp; // set p equal to the response such that it can be extracted.
       }//train
     }//class
