@@ -1,0 +1,40 @@
+Randomly generated positive definite 5x5 matrix:
+
+       128        -85         12         22         30 
+       -85        196        -99          6        -40 
+        12        -99        131         51         78 
+        22          6         51         77         37 
+        30        -40         78         37        167 
+Decompositioned matrix into L using the Cholesky-Banachiewicz method
+
+      11.3          0          0          0          0 
+     -7.51       11.8          0          0          0 
+      1.06      -7.71        8.4          0          0 
+      1.94       1.74       7.43       3.87          0 
+      2.65       -1.7        7.4       -5.2       8.68 
+Is L*L.T = A? True 
+
+Decompositioned matrix into L using the Cholesky-Crout method
+
+      11.3          0          0          0          0 
+     -7.51       11.8          0          0          0 
+      1.06      -7.71        8.4          0          0 
+      1.94       1.74       7.43       3.87          0 
+      2.65       -1.7        7.4       -5.2       8.68 
+Is L*L.T = A? True 
+
+Randomly generated vector:
+         3          1         10         10          7 
+Solution vector x to the equation Ax=b
+     0.227       0.29      0.387      -0.18    -0.0701 
+Is A*x = b? True
+
+The determinant of matrix A is = 1420309969
+The calculated inverse matrix of A is:
+
+    0.0536      0.058     0.0716    -0.0596     -0.016 
+     0.058     0.0745     0.0907    -0.0735    -0.0187 
+    0.0716     0.0907      0.123    -0.0961    -0.0275 
+   -0.0596    -0.0735    -0.0961     0.0908     0.0179 
+    -0.016    -0.0187    -0.0275     0.0179     0.0133 
+is A*inv = 1? True
