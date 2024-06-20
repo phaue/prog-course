@@ -50,7 +50,7 @@ public static partial class QRGS{
 		vector x = new vector(c.size);
 		matrix U = R.copy();
 		U = U.transpose();
-		for(int i=c.size-1; i>=0; i--){
+		for(int i=c.size-1; i>=0; i--){ //back substitution
 			double sum = 0;
 			for(int k=i+1;k<c.size;k++){
 			       	sum+=U[i][k]*x[k];
