@@ -8,3 +8,4 @@ I have made it possible to alter the size of the matrix subject to the tests thr
 Then i have tried to see if either of Cholesky-Banaschiewicz or Cholesky-Crout method was to be preferred by timing calculations of large randomly generated matrices.
 For the sizes tested there is no clear advantage of either, they are equally good on random matrices.
 The ranges for testing the algorithms can be changed in the makefile.
+It is also shown that they follow the 1/3*n^3 trend that was expected from the wiki article.
