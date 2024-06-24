@@ -25,7 +25,7 @@ time.gnuplot.svg: Out_time.txt Makefile
 		' | gnuplot
 
 Out_test.txt : main_imp.exe
-	mono $< matrixsize:5 > $@
+	mono $< matrixsize:5 1> $@ 2>testerror.txt
 
 Out_time.txt : main_time.exe
 	mono $< lowlim:5 uplim:600 stepsize:5 >$@
@@ -41,4 +41,4 @@ lib.dll : $(LIBPATH)matrix.cs $(LIBPATH)vector.cs algorithms.cs ../homework/1-Li
 
 .PHONEY : clean
 clean : 
-	$(RM) *.exe *.dll *.svg [Oo]ut*.txt
+	$(RM) *.exe *.dll *.svg [Oo]ut*.txt testerror.txt
